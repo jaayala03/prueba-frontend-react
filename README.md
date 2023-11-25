@@ -35,8 +35,9 @@ El proyecto utiliza las siguientes tecnologías para desarrollar una aplicación
 
 ## Uso
 
-1. Inicia la aplicación: `npm run start`
-2. Abre tu navegador y accede a `http://localhost:3000`
+1. Has una copia del archivo `.env.example` que se encuentra en la raiz del proyecto y renombralo a `.env` para usar las variables de entorno
+2. Inicia la aplicación: `npm run start`
+3. Abre tu navegador y accede a `http://localhost:3000`
 
 ## Contribución
 
