@@ -1,5 +1,19 @@
 .home {
 
+    .home-menu {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        row-gap: 40px;
+
+        .btn-home {
+            background: #DCF421;
+            color: #122008;
+            width: 250px;
+        }
+    }
+
     .errors{
         color: red;
         font-size: 12px;

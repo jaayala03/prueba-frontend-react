@@ -10,5 +10,15 @@
         align-items: flex-start;
         padding: 0 50px;
         text-align: justify;
+
+        .card-foot {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            .btn-return {
+                background: #DCF421;
+                color: #122008;
+            }
+        }
     }
 }

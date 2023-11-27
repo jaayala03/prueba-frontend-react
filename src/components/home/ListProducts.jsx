@@ -9,11 +9,13 @@ import { numberFormat } from '../../utils/Utils';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { publish, subscribe, unsubscribe } from "../../events/events";
+import swal from 'sweetalert';
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 
 
 export const ListProducts = () => {
-    
-    const navigate = useNavigate ();    
+
+    const navigate = useNavigate();
 
     const {
         products,
@@ -25,8 +27,13 @@ export const ListProducts = () => {
         getListCartFromLocalStorage,
         setListCart,
         saveListCartToLocalStorage,
-        
+
     } = useContext(ProductsContext);
+
+    const handleGoTo = (route) => {
+
+        navigate(`${route}`);
+    };
 
     const reloadProducts = () => {
         getProducts();
@@ -45,21 +52,25 @@ export const ListProducts = () => {
         saveListCartToLocalStorage(updatedCart);
 
         publish('updateCart', { status: true });
+
+        swal('Success!', 'Product successfully removed to shopping cart', 'success');
     }
 
     const columns = [
         { field: 'id', headerName: 'ID', width: 50 },
         { field: 'title', headerName: 'Name', width: 300 },
         { field: 'description', headerName: 'Description', width: 150 },
-        { field: 'quantity', headerName: 'Quantity', width: 150},
-        { field: 'price', headerName: 'Unit. Price', width: 100,
+        { field: 'quantity', headerName: 'Quantity', width: 150 },
+        {
+            field: 'price', headerName: 'Unit. Price', width: 100,
             renderCell: (params) => (
                 <div style={{ display: 'flex', justifyContent: 'flex-end', width: '100%' }}>
                     <span>{numberFormat(params.row.price)}</span>
                 </div>
-            ),     
+            ),
         },
-        { field: 'total', headerName: 'Total', width: 100,
+        {
+            field: 'total', headerName: 'Total', width: 100,
             renderCell: (params) => (
                 <div style={{ display: 'flex', justifyContent: 'flex-end', width: '100%' }}>
                     <span>{numberFormat(params.row.total)}</span>
@@ -85,18 +96,33 @@ export const ListProducts = () => {
 
     return (
         <div>
-            <h2 className="mb-5">Products</h2>
+            <h2 className="mb-5">Shopping cart</h2>
 
-            <DataGrid
-                rows={getListCartFromLocalStorage()}
-                columns={columns}
-                initialState={{
-                    pagination: {
-                        paginationModel: { page: 0, pageSize: 10 },
-                    },
-                }}
-                pageSizeOptions={[5, 10, 50, 100]}
-            />
+
+            {
+                getListCartFromLocalStorage().length > 0 ? (
+                    <>
+                        <DataGrid
+                            rows={getListCartFromLocalStorage()}
+                            columns={columns}
+                            initialState={{
+                                pagination: {
+                                    paginationModel: { page: 0, pageSize: 10 },
+                                },
+                            }}
+                            pageSizeOptions={[5, 10, 50, 100]}
+                        />
+                    </>
+                )
+                :
+                <>
+                    <Button className="btn-home" variant="contained" color="primary" onClick={() => handleGoTo('/product/shopping')}>
+                        <AddShoppingCartIcon></AddShoppingCartIcon> Buy Products
+                    </Button>
+                </>
+                    
+                
+            }
 
             <ModalProducts status={statusModal} data={productItem} reloadProducts={reloadProducts} />
         </div>

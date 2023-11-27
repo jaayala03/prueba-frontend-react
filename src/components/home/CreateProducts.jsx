@@ -3,8 +3,17 @@ import ProductsContext from "../../context/ProductsContext";
 import useForm from '../../hooks/useForm';
 import { Grid, Button, TextField } from '@material-ui/core';
 import SaveIcon from '@mui/icons-material/Save';
+import { useNavigate } from 'react-router-dom';
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 
 export const CreateProducts = () => {
+
+    const navigate = useNavigate ();  
+
+    const handleGoTo = (route) => {
+
+        navigate(`${route}`);
+    };
 
     const {
         saveProduct
@@ -32,13 +41,12 @@ export const CreateProducts = () => {
             await saveProduct(valid);
 
             handleReset();
-
         }
     }
 
     return (
         <div>
-            <h2 className="mb-5">Product</h2>
+            <h2 className="mb-5">Add Product</h2>
             
             <form onSubmit={handleSave}>
                 <Grid container direction="column" spacing={2}>
@@ -81,6 +89,12 @@ export const CreateProducts = () => {
                         <Button type="submit" variant="contained" color="primary">
                             <SaveIcon></SaveIcon> Save
                         </Button>
+                    </Grid>
+
+                    <Grid item>
+                    <Button className="btn-default" variant="contained" color="primary" onClick={() => handleGoTo('/product/shopping')}>
+                        <AddShoppingCartIcon></AddShoppingCartIcon> Buy Products
+                    </Button>
                     </Grid>
                 </Grid>
             </form>

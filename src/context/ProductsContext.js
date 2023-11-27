@@ -78,9 +78,19 @@ const ProductsProvider = ({ children }) => {
             categoryId: 1
         }
 
+        const exist = getListFromLocalStorage().find(object => object.id === obj.id || object.title === obj.title);
+
+        if(exist) {
+            swal('Warning!', 'This product already exists in storage!', 'warning');
+            return
+        }
+        
+
         const newList = [...list, obj];
         setList(newList);
         saveListToLocalStorage(newList);
+
+        swal('Success!', 'The product has been successfully created', 'success');
 
         // // for edit element into list
         // modifyElementInList(id, updatedElement);
@@ -119,6 +129,8 @@ const ProductsProvider = ({ children }) => {
         const newList = [...listCart, elementCart];
         setListCart(newList);
         saveListCartToLocalStorage(newList);
+
+        swal('Success!', 'Product successfully added to shopping cart', 'success');
     };
 
     const data = {

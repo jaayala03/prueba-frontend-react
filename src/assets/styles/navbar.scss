@@ -16,8 +16,11 @@ nav {
             display: flex;
             list-style: none;
             column-gap: 30px;
+            align-items: center;
             li {
                 a {
+                    display: flex;
+                    align-items: center;
                     text-decoration: none;
                     color: #FFFFFF;
                     &:hover {
@@ -44,4 +47,15 @@ nav {
             color: #072B3B;
         }
     }
+}
+
+.cart-icon {
+    margin: 0 !important;
+    padding: 0 !important;
+    color: #FFFFFF !important;
+}
+.css-1to51ap-MuiBadge-root .MuiBadge-badge {
+    background: #DCF421;
+    border-color: #072941 !important;
+    color: #072941 !important;
 }

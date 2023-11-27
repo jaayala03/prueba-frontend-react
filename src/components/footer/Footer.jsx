@@ -13,16 +13,16 @@ const Footer = () => {
         <div className="foot-items">
           <ul>
             <li>
-              <Link to="/">FAQs</Link>
+              <Link to="#">FAQs</Link>
             </li>
             <li>
-              <Link to="/">Blog</Link>
+              <Link to="#">Blog</Link>
             </li>
             <li>
-              <Link to="/">Terms and Conditions</Link>
+              <Link to="#">Terms and Conditions</Link>
             </li>
             <li>
-              <Link to="/">Privacy Policy</Link>
+              <Link to="#">Privacy Policy</Link>
             </li>
           </ul>
         </div>

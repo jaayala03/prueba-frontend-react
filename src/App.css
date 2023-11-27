@@ -4,6 +4,10 @@
   width: 100%;
 }
 
+.btn-default {
+  background: #DCF421 !important;
+  color: #122008 !important;
+}
 
 .content-app {
   max-width: 1140px;

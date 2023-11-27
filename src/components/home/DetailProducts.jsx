@@ -9,11 +9,20 @@ import Select from '@mui/material/Select';
 import FormHelperText from '@mui/material/FormHelperText';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import { publish, subscribe, unsubscribe } from "../../events/events";
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { useNavigate } from 'react-router-dom';
+import '../../assets/styles/detail.scss';
 
 export const DetailProducts = () => {
 
+    const navigate = useNavigate ();  
+
+    const handleGoTo = (route) => {
+
+        navigate(`${route}`);
+    };
+
     const {
-        saveProduct,
         products,
         addToCart,
         getListFromLocalStorage,
@@ -52,12 +61,12 @@ export const DetailProducts = () => {
 
     return (
         <div>
-            <h2 className="mb-5">Product Detail</h2>
+            <h2 className="mb-5">Add Products to cart</h2>
 
             <form onSubmit={handleSave}>
                 <Grid container direction="column" spacing={2}>
                     <Grid item>
-                        <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+                        <FormControl variant="standard" sx={{ m: 1, minWidth: 200 }}>
                             <InputLabel>Product</InputLabel>
                             <Select
                                 label="Product"
@@ -95,6 +104,12 @@ export const DetailProducts = () => {
                     <Grid item>
                         <Button type="submit" variant="contained" color="primary">
                             <AddShoppingCartIcon></AddShoppingCartIcon> Add to cart
+                        </Button>
+                    </Grid>
+
+                    <Grid item>
+                        <Button className="btn-default" variant="contained" color="primary" onClick={() => handleGoTo('/shopping-cart')}>
+                            <ShoppingCartIcon></ShoppingCartIcon> Go to Shopping Cart
                         </Button>
                     </Grid>
                 </Grid>

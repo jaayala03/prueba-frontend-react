@@ -6,10 +6,25 @@ import '../../assets/styles/navbar.scss';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import { numberFormat } from '../../utils/Utils';
 import { publish, subscribe, unsubscribe } from "../../events/events";
+import IconButton from '@mui/material/IconButton';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { styled } from '@mui/material/styles';
+import Badge from '@mui/material/Badge';
+import HomeIcon from '@mui/icons-material/Home';
+
+const StyledBadge = styled(Badge)(({ theme }) => ({
+    '& .MuiBadge-badge': {
+      right: -3,
+      top: 13,
+      border: `2px solid ${theme.palette.background.paper}`,
+      padding: '0 4px',
+    },
+  }));
 
 const Navbar = () => {
 
     const [totalCart, setTotalCart] = useState(0);
+    const [countCart, setCountCart] = useState(0);
 
     const getListCartFromLocalStorage = () => {
         const listString = localStorage.getItem('cart');
@@ -19,6 +34,9 @@ const Navbar = () => {
     const calculateTotal = () => {
         const totalSum = getListCartFromLocalStorage().reduce((accumulator, product) => accumulator + product.total, 0);
         setTotalCart(totalSum);
+
+        const count = getListCartFromLocalStorage().length;
+        setCountCart(count);
     };
 
     useEffect(() => {
@@ -44,16 +62,28 @@ const Navbar = () => {
                 <div className="nav-items">
                     <ul>
                         <li>
-                            <Link to="/">Recommended</Link>
+                            <Link to="/"><HomeIcon></HomeIcon> Home</Link>
                         </li>
                         <li>
-                            <Link to="/">Sign up</Link>
+                            <Link to="#">Recommended</Link>
                         </li>
                         <li>
-                            <Link to="/">Sign in</Link>
+                            <Link to="#">Sign up</Link>
                         </li>
                         <li>
-                            <Link to="/">Total <b>{numberFormat(totalCart)}</b></Link>
+                            <Link to="#">Sign in</Link>
+                        </li>
+                        <li>
+                            <Link to="/shopping-cart">Total <b>{numberFormat(totalCart)}</b></Link>
+                        </li>
+                        <li>
+                            <Link to="/shopping-cart">
+                                <IconButton className="cart-icon" aria-label="cart">
+                                    <StyledBadge className="cart-icon-badge" badgeContent={countCart} color="secondary">
+                                        <ShoppingCartIcon />
+                                    </StyledBadge>
+                                </IconButton>    
+                            </Link>
                         </li>
                     </ul>
                 </div>
