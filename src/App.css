@@ -1,5 +1,14 @@
 .App {
   text-align: center;
+  overflow-x: hidden;
+  width: 100%;
+}
+
+
+.content-app {
+  max-width: 1140px;
+  margin: auto;
+  padding: 8rem 0 8rem 0;
 }
 
 .App-logo {

@@ -11,6 +11,14 @@ export async function listProducts() {
         console.error(error);
     }
 }
+export async function getProduct(id) {
+    try {
+        const r = await axios.get(`${REACT_APP_URL_API}/products/${id}`);
+        return r.data;
+    } catch (error) {
+        console.error(error);
+    }
+}
 
 export async function createProducts(user, payload) {
     try {

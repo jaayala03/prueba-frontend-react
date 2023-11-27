@@ -1,6 +1,6 @@
-export function numberFormat(value, type) {
+export function numberFormat(value) {
     let money = new Intl.NumberFormat('en-US', {
-        style: 'currency', currency: 'COP', minimumFractionDigits: 0,
+        style: 'currency', currency: 'USD', minimumFractionDigits: 0,
     }).format(value);
-    return type === '1' ? money : money.replace('$', '$-');
+    return money;
 }

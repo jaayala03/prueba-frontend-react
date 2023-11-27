@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import ProductsContext from "../../context/ProductsContext";
 import useForm from '../../hooks/useForm';
 import { Grid, Button, TextField } from '@material-ui/core';
+import SaveIcon from '@mui/icons-material/Save';
 
 export const CreateProducts = () => {
 
@@ -12,11 +13,13 @@ export const CreateProducts = () => {
     const initialValues = {
         title: '',
         description: '',
+        price: '',
     };
 
     const validations = {
         title: (value) => (!value ? 'This field is required' : ''),
         description: (value) => (!value ? 'This field is required' : ''),
+        price: (value) => (!value ? 'This field is required' : ''),
     };
 
     const { values, errors, handleChange, handleSubmit, handleReset } = useForm(initialValues, validations);
@@ -34,37 +37,55 @@ export const CreateProducts = () => {
     }
 
     return (
-        <form onSubmit={handleSave}>
-            <Grid container direction="column" spacing={2}>
-                <Grid item>
-                    <TextField
-                        label="Name"
-                        name="title"
-                        value={values.title}
-                        onChange={handleChange}
-                        error={!!errors.title}
-                        helperText={errors.title}
-                    />
-                </Grid>
+        <div>
+            <h2 className="mb-5">Product</h2>
+            
+            <form onSubmit={handleSave}>
+                <Grid container direction="column" spacing={2}>
+                    <Grid item>
+                        <TextField
+                            label="Name"
+                            name="title"
+                            value={values.title}
+                            onChange={handleChange}
+                            error={!!errors.title}
+                            helperText={errors.title}
+                        />
+                    </Grid>
 
-                <Grid item>
-                    <TextField
-                        label="Description"
-                        name="description"
-                        value={values.description}
-                        onChange={handleChange}
-                        error={!!errors.description}
-                        helperText={errors.description}
-                    />
-                </Grid>
+                    <Grid item>
+                        <TextField
+                            label="Price"
+                            name="price"
+                            type="number"
+                            inputProps={{ min: 1 }}
+                            value={values.price}
+                            onChange={handleChange}
+                            error={!!errors.price}
+                            helperText={errors.price}
+                        />
+                    </Grid>
 
-                <Grid item>
-                    <Button type="submit" variant="contained" color="primary">
-                        Save
-                    </Button>
+                    <Grid item>
+                        <TextField
+                            label="Description"
+                            name="description"
+                            value={values.description}
+                            onChange={handleChange}
+                            error={!!errors.description}
+                            helperText={errors.description}
+                        />
+                    </Grid>
+
+                    <Grid item>
+                        <Button type="submit" variant="contained" color="primary">
+                            <SaveIcon></SaveIcon> Save
+                        </Button>
+                    </Grid>
                 </Grid>
-            </Grid>
-        </form>
+            </form>
+        </div>
+
     );
 }
 

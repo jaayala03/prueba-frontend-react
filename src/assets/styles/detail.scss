@@ -1,0 +1,14 @@
+.content-detail {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 10px;
+
+    .content-items { 
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        padding: 0 50px;
+        text-align: justify;
+    }
+}
